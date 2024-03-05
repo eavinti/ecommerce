@@ -41,3 +41,4 @@ class PromotionalCode:
         """Verifica si el descuento puede aplicarse al total actual del carro."""
         # TODO fixit
         return cart_total >= self.minimum_purchase
+

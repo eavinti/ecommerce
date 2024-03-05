@@ -32,7 +32,7 @@ def create_coupons(item_id):
             item=item_id,
             purchase_type=PurchaseType.AMOUNT.value,
             minimum_purchase=100,
-            maximum_purchase=150
+            maximum_purchase=350
         ),
         PromotionalCode(
             code='PROMO50',
@@ -42,6 +42,15 @@ def create_coupons(item_id):
             purchase_type=PurchaseType.AMOUNT.value,
             minimum_purchase=200,
             maximum_purchase=500
+        ),
+        PromotionalCode(
+            code='PROMO_A',
+            discount_value=200,
+            discount_type=DiscountType.FIXED_DISCOUNT.value,
+            scope=CouponScope.CART.value,
+            purchase_type=PurchaseType.TOTAL.value,
+            minimum_purchase=200,
+            maximum_purchase=10000
         ),
     ]
     return promotional_codes
