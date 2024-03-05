@@ -21,6 +21,8 @@ $ python main.py
 
 ### Puedes iniciar la con la opción **9** para prellenar con datos
 
+- Una vez tengas el carrito, con la opción 6 podrás intercambiar códigos promocionales y ver los diferentes descuentos
+- Cuando eliges la opción 3, la primera vez te pide un país y la próxima vez que agregas productos todos pertenecen al mismo país.
 
 ### Para correr los test
 ```
