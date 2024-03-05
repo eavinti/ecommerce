@@ -15,8 +15,8 @@ class Item:
 
     def final_price(self, pais):
         """Calcula el precio final del producto después de aplicar el descuento."""
-        base_price = self.prices[pais]
-        discount = self.discounts.get(pais, 0)
+        base_price = float(self.prices[pais])
+        discount = float(self.discounts.get(pais, 0))
         if discount == 0:
             return base_price
         return base_price - (base_price * discount / 100)

@@ -1,5 +1,6 @@
 from models.item import Item
 from models.promotional_code import PromotionalCode
+from resources.validators.string_validator import country_validator
 from models.cart import Cart
 
 from resources.test_data import ITEMS
@@ -12,19 +13,18 @@ def main():
     items = {}  # Diccionario para almacenar los productos disponibles
     promotional_codes = {}  # Diccionario para almacenar los códigos promocionales
     current_cart = None
-    test_data_used = False
 
     while True:
         print("\nComandos disponibles:")
         print("1. Añadir producto al catálogo")
-        print("2. Mostrar productos disponibles")
-        print("3. Añadir producto al carro")
+        print("2. 📝 Mostrar productos disponibles")
+        print("3. +🛒Añadir producto al carro")
         print("4. Crear código promocional")
         print("5. Listar códigos promocionales")
         print("6. Añadir código promocional carro")
-        print("7. Mostrar total del carro")
-        print("8. Agrega datos de prueba")
-        print("9. Salir")
+        print("7. 🛒 Mostrar total del carro")
+        print("8. 🤖 Agrega datos de prueba")
+        print("9. 🚪 Salir")
         option = input("Seleccione una opción: ")
 
         if option == "1":
@@ -34,7 +34,7 @@ def main():
             list_item(items)
         elif option == "3":
             if not isinstance(current_cart, Cart):
-                country = input("¿De qué país estás comprando? (ES, GB, IT): ")
+                country = country_validator(input("¿De qué país estás comprando? (ES, GB, IT): "))
                 current_cart = Cart(country)
             item_id = input("Ingresa el ID del producto: ")
             amount = input("Ingresa la cantidad del producto: ")
@@ -48,7 +48,14 @@ def main():
         elif option == "5":
             list_coupons(promotional_codes)
         elif option == "6":
-            pass
+            code = input("¿Qué código quieres usar?: ")
+            if code in promotional_codes:
+                if isinstance(current_cart, Cart):
+                    current_cart.promotional_code = promotional_codes[code]
+                else:
+                    print('El carro sigue vacio!')
+            else:
+                print('El código no existe!')
         elif option == "7":
             cart_total(current_cart)
         elif option == "8":

@@ -24,9 +24,8 @@ class Cart:
             item = value['item']
             amount = float(value['amount'])
             final_price = item.final_price('ES')
-            print('>>> ', item)
-            print('>>> ', final_price, type(final_price))
-            print('>>> ', amount, type(amount))
+
+
             total += (final_price * amount)
         # total = sum(item.final_price(country) for item, country in self.items)
         #
