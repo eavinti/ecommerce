@@ -19,6 +19,8 @@ class PromotionalCode:
         - discount_type: DiscountType, FIXED_DISCOUNT= descuento fijo y PERCENTAGE_DISCOUNT = descuento de porcentaje
         - scope: CouponScope, Si el descuento es el carrito a un producto en especifico
         - item: str, code del producto
+        - # REGLA SI CUMPLE EL DESCUENTO:
+        - purchase_type: PurchaseType,
         - minimum_purchase: float, mínimo necesario para aplicar el descuento
         - maximum_purchase: float, máximo necesario para aplicar el descuento
         """

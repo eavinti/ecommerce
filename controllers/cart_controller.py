@@ -3,7 +3,7 @@ from models.cart import Cart
 
 def cart_total(cart):
     if isinstance(cart, Cart):
-        total = cart.cart_total()
+        total, total_with_discount, items = cart.get_invoice()
         cart_country = cart.country
         print('----------------------------------------------')
         print('Carro de compras 🛒:')
@@ -11,16 +11,17 @@ def cart_total(cart):
         if cart.promotional_code:
             print('Tiene un código promocional 🎫: {}'.format(cart.promotional_code.code))
         print('')
-        print(f"{'ID':<{20}} {'TÍTULO':<{20}} {'PRECIO':<{20}} {'DESCUENTO (%)':<{20}} {'CANTIDAD':<{20}} {'PRECIO FINAL':<{20}} {'TOTAL':<{20}}")
-        for value in cart.items:
-            item_total = value['item'].final_price(cart_country) * float(value['amount'])
+        print(
+            f"{'ID':<{20}}{'TÍTULO':<{20}}{'PRECIO':<{20}}{'DESCUENTO (%)':<{20}}{'CANTIDAD':<{20}}{'PRECIO FINAL':<{20}}{'TOTAL':<{20}}{'TOTAL CON DESCUENTO':<{20}}")
+        for item in items:
             print(
-                f"{value['item'].id:<{20}}{value['item'].title:<{20}} {value['item'].prices[cart_country]:<{20}} {value['item'].discounts[cart_country]:<{20}} {value['amount']:<{20}} {value['item'].final_price(cart_country):<{20}} {item_total:<{20}}"
+                f"{item['id']:<{20}}{item['title']:<{20}}{item['price']:<{20}}{item['discount']:<{20}}{item['amount']:<{20}}{item['final_price']:<{20}}{item['total']:<{20}.2f}{item['total_with_discount']:<{20}.2f}"
             )
 
-        print(f"Total sin descuentos carro: {total}€")
+        print('')
+        print(f"Total sin descuentos: {total:.2f}€")
+        print(f"Total con descuentos: {total_with_discount:.2f}€")
         print('----------------------------------------------')
         return True
     print('- :( el carro sigue vacio.')
     return False
-
