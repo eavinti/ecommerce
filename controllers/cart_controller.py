@@ -8,7 +8,9 @@ def cart_total(cart):
         print('----------------------------------------------')
         print('Carro de compras 🛒:')
         print('El carro de compras se inicio con país 🌎: {}'.format(cart_country))
-        print('Tiene un código promocional 🎫: {}'.format(cart.promotional_code.code))
+        if cart.promotional_code:
+            print('Tiene un código promocional 🎫: {}'.format(cart.promotional_code.code))
+        print('')
         print(f"{'ID':<{20}} {'TÍTULO':<{20}} {'PRECIO':<{20}} {'DESCUENTO (%)':<{20}} {'CANTIDAD':<{20}} {'PRECIO FINAL':<{20}} {'TOTAL':<{20}}")
         for value in cart.items:
             item_total = value['item'].final_price(cart_country) * float(value['amount'])

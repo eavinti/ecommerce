@@ -57,9 +57,12 @@ def create_coupon():
 
 
 def list_coupons(coupons):
+    print("---------------------------------------")
+    print("CÓDIGOS PROMOCIONALES: ")
     for coupon in coupons.values():
         discount_type_char = '%' if coupon.discount_type == DiscountType.PERCENTAGE_DISCOUNT.value else '€'
-        will_be_applied_in = 'todo el carrito' if coupon.scope == CouponScope.CART.value else "el producto '{}'".format(coupon.item)
+        will_be_applied_in = 'todo el carrito' if coupon.scope == CouponScope.CART.value else "el producto '{}'".format(
+            coupon.item)
         total_type_discount = 'unidades compradas' if coupon.purchase_type == PurchaseType.AMOUNT.value else '€ comprados'
         print(
             "- 🎫 '{}': tiene un descuento de {} {}, se aplicará en {}. Será válido si cumple de {} a {} {}.".format(
@@ -72,3 +75,4 @@ def list_coupons(coupons):
                 total_type_discount,
             )
         )
+    print("---------------------------------------")

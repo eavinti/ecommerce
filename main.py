@@ -3,7 +3,7 @@ from models.promotional_code import PromotionalCode
 from resources.validators.string_validator import country_validator
 from models.cart import Cart
 
-from resources.test_data import ITEMS
+from resources.test_data import ITEMS, create_coupons
 from controllers.item_controller import list_item, create_item
 from controllers.cart_controller import cart_total
 from controllers.coupon_controller import create_coupon, list_coupons
@@ -59,9 +59,14 @@ def main():
         elif option == "7":
             cart_total(current_cart)
         elif option == "8":
-            for test_item in ITEMS:
+            for index, test_item in enumerate(ITEMS):
                 items[test_item.id] = test_item
+                if index == 0:
+                    coupons = create_coupons(test_item.id)
+                    for coupon in coupons:
+                        promotional_codes[coupon.code] = coupon
             list_item(items)
+            list_coupons(promotional_codes)
         elif option == "9":
             break
         else:
